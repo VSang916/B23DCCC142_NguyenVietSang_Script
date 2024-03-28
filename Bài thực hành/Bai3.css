@@ -1,0 +1,29 @@
+.danh-sach-san-pham {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.san-pham {
+  width: 150px;
+  height: 220px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.san-pham:hover {
+  border-color: #f0790a;
+}
+
+.ten-san-pham,
+.gia-san-pham {
+  margin: 5px;
+}
+
+.ten-san-pham:hover,
+.gia-san-pham:hover {
+  color: #dc5908f0;
+}
