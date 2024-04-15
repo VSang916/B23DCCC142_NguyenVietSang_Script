@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2</title>
+</head>
+<body>
+    <form id="mangForm">
+        <label for="mangInput">Nhập mảng số nguyên (cách nhau bằng dấu phẩy):</label>
+        <input type="text" id="mangInput" name="mang">
+        <button type="button" onclick="batDau()">Bắt đầu</button>
+    </form>
+    <p id="ketQua"></p>
+    <script>
+        function timSoNguyenLonNhat(mang) {
+            let soLonNhat = mang[0];
+            for (let i = 1; i < mang.length; i++) {
+            if (mang[i] > soLonNhat) {
+                soLonNhat = mang[i];
+            }
+            }
+            return soLonNhat;
+        }
+        function timSoChinhPhuong(mang) {
+            const soChinhPhuong = [];
+            for (let i = 0; i < mang.length; i++) {
+                const so = mang[i];
+                if (Number.isInteger(Math.sqrt(so))) {
+                soChinhPhuong.push(so);
+                }
+            }
+            return soChinhPhuong;
+        }
+        function timSoLonHonTrungBinhCong(mang) {
+            let tong = 0;
+            for (let i = 0; i < mang.length; i++) {
+            tong += mang[i];
+            }
+            const trungBinhCong = tong / mang.length;
+            const b = trungBinhCong.toFixed(2);
+            const soLonHon = [];
+            for (let i = 0; i < mang.length; i++) {
+            if (mang[i] > trungBinhCong) {
+                soLonHon.push(mang[i]);
+            }
+            }
+            return soLonHon;
+        }
+        function tinhTrungBinhCongSoKhongAm(mang) {
+            let tongSoKhongAm = 0;
+            let demSoKhongAm = 0;
+            for (let i = 0; i < mang.length; i++) {
+                if (mang[i] >= 0) {
+                tongSoKhongAm += mang[i];
+                demSoKhongAm++;
+                }
+            }
+            if (demSoKhongAm === 0) {
+                return "Mảng không có số không âm";
+            } else {
+                const trungBinh = tongSoKhongAm / demSoKhongAm;
+                const b = trungBinh.toFixed(2);
+                return b;
+            }
+        }
+
+        function batDau() {
+            const mangInput = document.getElementById("mangInput").value;
+            const mangSoNguyen = mangInput.split(",").map(Number);
+            const soLonNhat = timSoNguyenLonNhat(mangSoNguyen);
+            const soChinhPhuong = timSoChinhPhuong(mangSoNguyen);
+            const soLonHonTrungBinhCong = timSoLonHonTrungBinhCong(mangSoNguyen);
+            const trungBinhCongSoKhongAm = tinhTrungBinhCongSoKhongAm(mangSoNguyen);
+            document.write("Mảng nhập vào là: ", mangSoNguyen,'<br>');
+            document.write("Số nguyên lớn nhất:", soLonNhat,'<br>');
+            document.write("Các số chính phương:", soChinhPhuong,'<br>');
+            document.write("Các số lớn hơn trung bình cộng:", soLonHonTrungBinhCong,'<br>');
+            document.write("Trung bình cộng số không âm:", trungBinhCongSoKhongAm,'<br>');
+        }    
+    </script>
+</body>
+</html>

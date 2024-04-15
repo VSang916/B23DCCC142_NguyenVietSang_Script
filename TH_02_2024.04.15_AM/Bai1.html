@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bài 1</title>
+</head>
+<body>
+    <h1>Sắp xếp mảng số nguyên</h1>
+    <form id="mangForm">
+        <label for="mangInput">Nhập mảng số nguyên (cách nhau bằng dấu phẩy):</label>
+        <input type="text" id="mangInput" name="mang">
+        <button type="button" onclick="sapXepMang()">Sắp xếp</button>
+    </form>
+    <p id="ketQua"></p>
+    <script>
+        function sapXepMang() {
+            var mangInput = document.getElementById("mangInput").value;
+            var mang = mangInput.split(",");
+            for (var i = 0; i < mang.length; i++) {
+                for (var j = 0; j < mang.length - i - 1; j++) {
+                    if (parseInt(mang[j]) > parseInt(mang[j + 1])) {
+                        var temp = mang[j];
+                        mang[j] = mang[j + 1];
+                        mang[j + 1] = temp;
+                    }
+                }
+            }
+            var ketQua = "Mảng đã sắp xếp: ";
+            var i;
+            for (i = 0; i < mang.length-1; i++) {
+                ketQua += mang[i] + ", ";
+            }
+            ketQua += mang[i];
+            document.getElementById("ketQua").innerHTML = ketQua;
+        }
+    </script>
+    <h1>Loại bỏ các phần tử trùng nhau</h1>
+    <form id="mangForm">
+        <label for="mangInput1">Nhập mảng số nguyên (cách nhau bằng dấu phẩy):</label>
+        <input type="text" id="mangInput1" name="mang1">
+        <button type="button" onclick="LoaiBo1()">Loại bỏ</button>
+    </form>
+    <p id="ketQua2"></p>
+    <script>
+        var mangInput1;
+        function LoaiBo() {
+            mangInput1 = document.getElementById("mangInput1").value;
+            const uniqueSet = new Set(mangInput1.split(",")); 
+            return [...uniqueSet]; 
+        }
+
+        function LoaiBo1() {
+            const uniqueArray = LoaiBo();
+            var ketQua2 = "Mảng đã loại bỏ các phần tử trùng nhau: ";
+            var i;
+            for (i=0; i < uniqueArray.length-1; i++) {
+                ketQua2 += uniqueArray[i] + ", ";
+            }
+            ketQua2 += uniqueArray[i];
+            document.getElementById("ketQua2").innerHTML = ketQua2;
+        }
+
+    </script>
+</body>
+</html>
