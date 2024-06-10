@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <table id="userTable">
+
+    </table>
+    <button id="load-data">Load data</button>
+    <table id="createTable">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text"   id="email"></td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td><input type="text"  id="phone"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text"   id="password"></td>
+        </tr>
+    </table>
+    <button id="createData">Create</button>
+    <script>
+        $(document).ready(function(){
+            $('#load-data').click(function(){
+                $.ajax({
+                    url:'http://api.uduer.com/users',
+                    type:"GET",
+                    success: function(result){
+                        var tbody = $('table#userTable');
+                        var data = result.data.users;
+                        console.log(data);
+                        data.forEach(function(user){
+                            tbody.append("<tr><td>"+user._id+"</td><td>"+user.name+"</td><td>"+user.email+"</td><td>"+"<button>Edit</button><button>Dele</button>"+"</td></tr>");
+                        });
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                })
+            })
+            $('#createData').click(function(){
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var phone = $("#phone").val();
+                var pw = $("#password").val();
+                $.ajax({
+                    url:'http://api.uduer.com/users',
+                    type: "POST",
+                    data: {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        password: pw,
+                    },
+                    success: function(result){
+                      console.log('thêm thành công')
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
